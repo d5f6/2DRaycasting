@@ -12,11 +12,11 @@ function draw() {
   background(0)
   wall.show()
   ray.show()
+  ray.lookAt(mouseX, mouseY)
 
   let pt = ray.cast(wall)
-  console.log(pt)
-  // if (pt) {
-  //   fill(255)
-  //   ellipse(pt.x, pt.y, 8, 8)
-  // }
+  if (pt) {
+    fill(255)
+    ellipse(pt.x, pt.y, 8, 8)
+  }
 }
