@@ -52,19 +52,13 @@ function draw() {
   const w = sceneW / scene.length
   for (let i = 0; i < scene.length; i++) {
     noStroke()
-    const b = map(scene[i], 0, sceneW, 255, 0)
+    const sq = scene[i] * scene[i]
+    const wSq = sceneW * sceneW
+    const b = map(sq, 0, wSq, 255, 0)
     const h = map(scene[i], 0, sceneW, sceneH, 0)
     fill(b)
     rectMode(CENTER)
-    rect(i * w + w / 2, sceneH / 2, w, h)
+    rect(i * w + w / 2, sceneH / 2, w + 1, h)
   }
   pop()
-  // ray.show()
-  // ray.lookAt(mouseX, mouseY)
-
-  // let pt = ray.cast(wall)
-  // if (pt) {
-  //   fill(255)
-  //   ellipse(pt.x, pt.y, 8, 8)
-  // }
 }

@@ -4,7 +4,7 @@ class Particle {
     this.rays = []
     this.heading = 0
 
-    for (let a = 0; a < 45; a += 1) {
+    for (let a = 0; a < 60; a += 1) {
       this.rays.push(new Ray(this.pos, radians(a)))
     }
   }
