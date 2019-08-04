@@ -31,21 +31,25 @@ function draw() {
   background(0)
 
   if (keyIsDown(65)) {
-    particle.rotate(-0.10)
+    particle.rotate(-0.1)
   } else if (keyIsDown(68)) {
-    particle.rotate(0.10)
+    particle.rotate(0.1)
+  } else if (keyIsDown(87)) {
+    particle.move(1)
+  } else if (keyIsDown(83)) {
+    particle.move(-1)
   }
 
   for (let wall of walls) {
     wall.show()
   }
   // particle.update(noise(xoff) * sceneW, noise(yoff) * sceneH)
-  particle.update(mouseX, mouseY)
+  // particle.update(mouseX, mouseY)
   particle.show()
   const scene = particle.look(walls)
 
-  xoff += 0.01
-  yoff += 0.01
+  // xoff += 0.01
+  // yoff += 0.01
 
   push()
   translate(sceneW, 0)
