@@ -1,6 +1,8 @@
 let walls = []
 let ray
 let particle
+let xoff = 0
+let yoff = 1000
 
 function setup() {
   createCanvas(400, 400)
@@ -24,9 +26,12 @@ function draw() {
   for (let wall of walls) {
     wall.show()
   }
-    particle.update(mouseX, mouseY)
+    particle.update(noise(xoff) * width, noise(yoff) * height)
     particle.show()
-    particle.look(walls)
+  particle.look(walls)
+  
+  xoff += 0.01
+  yoff += 0.01
   // ray.show()
   // ray.lookAt(mouseX, mouseY)
 
