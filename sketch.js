@@ -12,4 +12,11 @@ function draw() {
   background(0)
   wall.show()
   ray.show()
+
+  let pt = ray.cast(wall)
+  console.log(pt)
+  // if (pt) {
+  //   fill(255)
+  //   ellipse(pt.x, pt.y, 8, 8)
+  // }
 }
