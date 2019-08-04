@@ -35,10 +35,21 @@ function draw() {
   }
   particle.update(noise(xoff) * sceneW, noise(yoff) * sceneH)
   particle.show()
-  particle.look(walls)
+  const scene = particle.look(walls)
   
   xoff += 0.01
   yoff += 0.01
+
+  push()
+  translate(sceneW, 0)
+  const w = sceneW / scene.length
+  for (let i = 0; i < scene.length; i++) {
+    noStroke()
+    const b = map(scene[i], 0, sceneW, 255, 0)
+    fill(b)
+    rect(i * w, 0, w, height)
+  }
+  pop()
   // ray.show()
   // ray.lookAt(mouseX, mouseY)
 
