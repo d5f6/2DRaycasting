@@ -6,6 +6,7 @@ let yoff = 10000
 
 const sceneW = 400
 const sceneH = 400
+let sliderFOV
 
 function setup() {
   var canvas = createCanvas(800, 400)
@@ -25,8 +26,16 @@ function setup() {
   walls.push(new Boundary(0, sceneH, 0, 0))
 
   particle = new Particle()
+
+  sliderFOV = createSlider(0, 90, 45)
+  sliderFOV.input(changeFOV)
 }
 
+function changeFOV() {
+  const fov = sliderFOV.value()
+  particle.updateFOV(fov)
+}
+  
 function draw() {
   background(0)
 

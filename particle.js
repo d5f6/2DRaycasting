@@ -1,18 +1,27 @@
 class Particle {
   constructor() {
-    this.pos = createVector(width / 2, height / 2)
+    this.fov = 45
+    this.pos = createVector(sceneW / 2, sceneH / 2)
     this.rays = []
     this.heading = 0
 
-    for (let a = -30; a < 30; a += 1) {
+    for (let a = -this.fov / 2; a < this.fov / 2; a += 1) {
       this.rays.push(new Ray(this.pos, radians(a)))
+    }
+  }
+
+  updateFOV(fov) {
+    this.fov = fov
+    this.rays = []
+    for (let a = -this.fov / 2; a < this.fov / 2; a += 1) {
+      this.rays.push(new Ray(this.pos, radians(a) + this.heading))
     }
   }
 
   rotate(angle) {
     this.heading += angle
     let index = 0
-    for (let a = -30; a < 30; a += 1) {
+    for (let a = -this.fov / 2; a < this.fov / 2; a += 1) {
       this.rays[index].setAngle(radians(a) + this.heading)
       index++
     }
@@ -37,7 +46,11 @@ class Particle {
       for (let wall of walls) {
         const pt = ray.cast(wall)
         if (pt) {
-          const distance = p5.Vector.dist(this.pos, pt)
+          let distance = p5.Vector.dist(this.pos, pt)
+          let a = ray.dir.heading() - this.heading
+          if (!mouseIsPressed) {
+            distance *= cos(a)
+          }
           if (distance < record) {
             record = distance
             closest = pt
