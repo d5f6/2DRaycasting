@@ -8,7 +8,8 @@ const sceneW = 400
 const sceneH = 400
 
 function setup() {
-  createCanvas(800, 400)
+  var canvas = createCanvas(800, 400)
+  canvas.parent('canvas')
 
   for (let i = 0; i < 5; i++) {
     let x1 = random(sceneW)
@@ -24,19 +25,25 @@ function setup() {
   walls.push(new Boundary(0, sceneH, 0, 0))
 
   particle = new Particle()
-
 }
 
 function draw() {
   background(0)
 
+  if (keyIsDown(65)) {
+    particle.rotate(-0.10)
+  } else if (keyIsDown(68)) {
+    particle.rotate(0.10)
+  }
+
   for (let wall of walls) {
     wall.show()
   }
-  particle.update(noise(xoff) * sceneW, noise(yoff) * sceneH)
+  // particle.update(noise(xoff) * sceneW, noise(yoff) * sceneH)
+  particle.update(mouseX, mouseY)
   particle.show()
   const scene = particle.look(walls)
-  
+
   xoff += 0.01
   yoff += 0.01
 
@@ -46,8 +53,10 @@ function draw() {
   for (let i = 0; i < scene.length; i++) {
     noStroke()
     const b = map(scene[i], 0, sceneW, 255, 0)
+    const h = map(scene[i], 0, sceneW, sceneH, 0)
     fill(b)
-    rect(i * w, 0, w, height)
+    rectMode(CENTER)
+    rect(i * w + w / 2, sceneH / 2, w, h)
   }
   pop()
   // ray.show()
